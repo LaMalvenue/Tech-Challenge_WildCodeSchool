@@ -158,24 +158,12 @@ footer p {
 }
 
 /* *********** MEDIA QUERIES *********** */
-@media all and (max-width: 337px) {
-    input {
-        margin-bottom: 5px;
-    }
-    body {
+@media all and (max-width: 433px) {
+    body, .modify .update, .modify .delete, .member-item {
         font-size: 0.7rem;
     }
-}
-
-@media all and (min-width: 338px) and (max-width: 433px) {
-    body {
-        font-size: 0.85rem;
-    }
-    .member-item {
-        font-size: 0.7rem;
-    }
-    input {
-        margin-bottom: 5px;
+    .member-item input, button {
+        padding: 0;
     }
 }
 

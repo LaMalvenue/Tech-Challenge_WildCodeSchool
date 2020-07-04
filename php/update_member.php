@@ -1,7 +1,7 @@
 <?php
 include('../config.php');
 if (isset($_POST['name_member'])) {
-
+    echo $_POST['name_member'];
 
     $update_member = $WildCodeSchool->prepare('	UPDATE equipage
 								SET name_member = :name_member

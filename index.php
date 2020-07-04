@@ -1,6 +1,3 @@
-<?php
-include('config.php');
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -39,7 +36,7 @@ include('config.php');
 
             <!-- New member form -->
             <h2>Ajouter un(e) Argonaute</h2>
-            <form action="php/add_member.php" method="post" class="new-member-form">
+            <form action="config.php?task=write" method="post" class="new-member-form">
                 <label for="name">Nom de l&apos;Argonaute</label>
                 <input id="name" name="name" type="text" placeholder="Charalampos" required/>
                 <button type="submit">Envoyer</button>
@@ -50,47 +47,10 @@ include('config.php');
             <!-- Member list -->
             <h2>Membres de l'équipage</h2>
             <section class="member-list">
-
-                <?php
-
-                $req_members = $WildCodeSchool->query(' SELECT * FROM equipage ORDER BY id_member ASC');
-                $members_count = $WildCodeSchool->query('SELECT COUNT(*) AS members_count FROM equipage');
-                $count = $members_count->fetch();
-
-                if ($count['members_count'] < 1) { ?>
-
                     <div class="empty-equipage">
                         <p>Ton équipage est vide ! 😯</p>
                         <p>Ajoute tes compagnons pour pouvoir partir à l'aventure !</p>
                     </div>
-                <?php } else {
-
-                    while ($member = $req_members->fetch()) { ?>
-
-                        <div class="member-item">
-
-                            <span class="name-member">
-                                <?php echo htmlspecialchars($member['name_member']) ?>
-                            </span>
-                            <span class="modify">
-                                <a class="update"
-                                   href="php/update_member.php?id_member=<?php echo $member['id_member']?>"
-                                   title="Modifier ce membre">
-                                ✏️
-                                </a>
-                                <a class="delete" href="php/delete_member.php?id_member=<?php echo $member['id_member']?>"
-                                   title="Supprimer ce membre">
-                                ❌
-                                </a>
-                            </span>
-                        </div>
-
-                    <?php }
-                }
-                $req_members->closeCursor();
-                $members_count->closeCursor();
-                ?>
-
             </section>
         </div>
     </div>
