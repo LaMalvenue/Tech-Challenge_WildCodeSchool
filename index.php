@@ -11,7 +11,7 @@ include('config.php');
 
     <!-- **************** SHARE META **************** -->
     <title>Anaïs Rouvière - Tech Challenge</title>
-    <meta name="title" property="og:title" content="Anaïs Rouvière- Tech Challenge">
+    <meta name="title" property="og:title" content="Anaïs Rouvière - Tech Challenge">
     <meta name = "description" content = "Tech challenge pour la Wild Code School"/>
 
     <!-- **************** LINKS / CSS **************** -->
