@@ -78,7 +78,7 @@ include('config.php');
                                    title="Modifier ce membre">
                                 ✏️
                                 </a>
-                                <a href="php/delete_member.php?id_member=<?php echo $member['id_member']?>"
+                                <a class="delete" href="php/delete_member.php?id_member=<?php echo $member['id_member']?>"
                                    title="Supprimer ce membre">
                                 ❌
                                 </a>
