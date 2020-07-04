@@ -99,31 +99,38 @@ button:hover {
     padding: 0.25em 0;
     flex: 0 0 33.3333%;
 }
+
 .modify, .update-form {
     display: inline-flex;
     vertical-align: middle;
     align-items: center;
 }
+
 .modify a, input.update-input {
     font-size: 0.5rem;
     padding: 5px;
     transition: font-size 0.3s;
 }
+
 .modify a:hover, input.update-input:hover {
     font-size: 0.8rem;
     padding: 5px;
     text-decoration: none;
 }
+
 input.name-input {
     border: 2px solid #f76c6c;
     text-align: center;
 }
+
 input.update-input {
     font-size: 0.8rem;
 }
+
 input.update-input:hover {
     font-size: 1rem;
 }
+
 .empty-equipage {
     margin: auto;
     text-align: center;
@@ -155,11 +162,20 @@ footer p {
     input {
         margin-bottom: 5px;
     }
+    body {
+        font-size: 0.7rem;
+    }
 }
 
-@media all and (max-width: 433px) {
+@media all and (min-width: 338px) and (max-width: 433px) {
     body {
         font-size: 0.85rem;
+    }
+    .member-item {
+        font-size: 0.7rem;
+    }
+    input {
+        margin-bottom: 5px;
     }
 }
 
@@ -181,5 +197,9 @@ footer p {
         -ms-flex: 0 0 100%;
         flex: 0 0 100%;
         max-width: 650px;
+    }
+
+    .new-member-form {
+        margin: auto;
     }
 }
