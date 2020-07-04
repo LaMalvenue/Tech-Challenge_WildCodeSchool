@@ -68,18 +68,20 @@ include('config.php');
                     while ($member = $req_members->fetch()) { ?>
 
                         <div class="member-item">
-                            <?php echo htmlspecialchars($member['name_member']) ?>
 
-                            <span class="modify"> <a
-                                        href="php/delete_member.php?id_member=<?php echo $member['id_member'] ?>"
-                                        title="Modifier ce membre">
+                            <span class="name-member">
+                                <?php echo htmlspecialchars($member['name_member']) ?>
+                            </span>
+                            <span class="modify">
+                                <a class="update"
+                                   href="php/update_member.php?id_member=<?php echo $member['id_member']?>"
+                                   title="Modifier ce membre">
                                 ✏️
-                            </a>
-                            <a
-                                    href="php/delete_member.php?id_member=<?php echo $member['id_member'] ?>"
-                                    title="Supprimer ce membre">
+                                </a>
+                                <a href="php/delete_member.php?id_member=<?php echo $member['id_member']?>"
+                                   title="Supprimer ce membre">
                                 ❌
-                            </a>
+                                </a>
                             </span>
                         </div>
 
@@ -106,5 +108,6 @@ include('config.php');
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

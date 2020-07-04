@@ -99,20 +99,30 @@ button:hover {
     padding: 0.25em 0;
     flex: 0 0 33.3333%;
 }
-.modify {
+.modify, .update-form {
     display: inline-flex;
     vertical-align: middle;
     align-items: center;
 }
-.modify a {
+.modify a, input.update-input {
     font-size: 0.5rem;
     padding: 5px;
     transition: font-size 0.3s;
 }
-.modify a:hover {
+.modify a:hover, input.update-input:hover {
     font-size: 0.8rem;
     padding: 5px;
     text-decoration: none;
+}
+input.name-input {
+    border: 2px solid #f76c6c;
+    text-align: center;
+}
+input.update-input {
+    font-size: 0.8rem;
+}
+input.update-input:hover {
+    font-size: 1rem;
 }
 .empty-equipage {
     margin: auto;
