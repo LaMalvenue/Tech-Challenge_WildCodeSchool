@@ -69,9 +69,18 @@ include('config.php');
 
                         <div class="member-item">
                             <?php echo htmlspecialchars($member['name_member']) ?>
-                            <a href="php/delete_member.php?id_member=<?php echo $member['id_member'] ?>">
-                                <span class="align-middle"><button class="delete">❌</button></span>
+
+                            <span class="modify"> <a
+                                        href="php/delete_member.php?id_member=<?php echo $member['id_member'] ?>"
+                                        title="Modifier ce membre">
+                                ✏️
                             </a>
+                            <a
+                                    href="php/delete_member.php?id_member=<?php echo $member['id_member'] ?>"
+                                    title="Supprimer ce membre">
+                                ❌
+                            </a>
+                            </span>
                         </div>
 
                     <?php }
