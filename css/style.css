@@ -81,6 +81,15 @@ button:hover{
     padding: 0.25em 0;
     flex: 0 0 33.3333%;
 }
+button.delete {
+    font-size: 0.5rem;
+    padding: 5px;
+}
+.empty-equipage {
+    margin: auto;
+    text-align: center;
+    margin-top: 5rem;
+}
 /* *********** FOOTER *********** */
 footer {
     position: fixed;
