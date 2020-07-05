@@ -132,6 +132,7 @@ input.update-input:hover {
 }
 
 .empty-equipage {
+    display: none;
     margin: auto;
     text-align: center;
     margin-top: 5rem;

@@ -16,7 +16,9 @@ if ($task == "write") {
     postMembers();
 } else if ($task == "update") {
     updateMember();
-} else {
+} else if ($task == "delete") {
+    deleteteMember();
+}else {
     getMembers();
 }
 
@@ -43,17 +45,25 @@ function postMembers()
     echo json_encode(["status" => "success"]);
 }
 
+function deleteteMember() {
+    global $WildCodeSchool;
+    $delete_member = $WildCodeSchool->prepare('DELETE FROM equipage WHERE id_member=:id_member');
+    $delete_member->execute(array(
+        'id_member' => $_GET['id_member']));
+    echo json_encode(["status" => "success"]);
+}
+
 function updateMember() {
     global $WildCodeSchool;
-    if (!array_key_exists('name', $_POST)) {
+    if (!array_key_exists('name_update', $_POST)) {
         echo json_encode(["status" => "error"]);
         return;
     }
-    $member_name_update = htmlspecialchars($_POST['name_member']);
-    $update_member = $WildCodeSchool->prepare('UPDATE equipage SET name_member = :name_member WHERE id_member=:id_member'
+    $member_name_update = htmlspecialchars($_POST['name_update']);
+    $update_member = $WildCodeSchool->prepare('UPDATE equipage SET name_member = :name_update WHERE id_member=:id_member'
     );
     $update_member->execute(array(
-        'name_member'=> $member_name_update,
+        'name_update'=> $member_name_update,
         'id_member'=> $_GET['id_member']
     ));
     echo json_encode(["status" => "success"]);

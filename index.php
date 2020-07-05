@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 <!-- Header section -->
@@ -47,10 +48,11 @@
             <!-- Member list -->
             <h2>Membres de l'équipage</h2>
             <section class="member-list">
-                    <div class="empty-equipage">
-                        <p>Ton équipage est vide ! 😯</p>
-                        <p>Ajoute tes compagnons pour pouvoir partir à l'aventure !</p>
-                    </div>
+                <p>Chargement des membres de l'équipage...</p>
+                <div class="empty-equipage">
+                    <p>Ton équipage est vide ! 😯</p>
+                    <p>Ajoute tes compagnons pour pouvoir partir à l'aventure !</p>
+                </div>
             </section>
         </div>
     </div>

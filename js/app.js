@@ -1,5 +1,5 @@
 let getHttpRequest = function () {
-    var httpRequest = false;
+    let httpRequest = false;
     if (window.XMLHttpRequest) { // Mozilla, Safari,...
         httpRequest = new XMLHttpRequest();
         if (httpRequest.overrideMimeType) {
@@ -21,30 +21,92 @@ let getHttpRequest = function () {
     }
     return httpRequest
 }
+let memberButtons;
+let memberNameArea;
+let originalMemberName;
 
-// Récupérer les membres
+// ************************ Affichage des membres ************************
 function getMembers() {
-    const requeteAjax = getHttpRequest();
+    let requeteAjax = getHttpRequest();
     requeteAjax.open("GET", "config.php");
-
+    // Récupération de la BDD au format JSON puis conversion en HTML
     requeteAjax.onload = function () {
         const result = JSON.parse(requeteAjax.responseText);
-
         const html = result.map(function (member) {
-            return '<div class="member-item"><span class="name-member">' + member.name_member + '</span><span class="modify">\n' +
-                '                                <a class="update"\n' +
-                '                                   href="php/update_member.php?id_member=<?php //echo $member[\'id_member\']?>"\n' +
-                '                                   title="Modifier ce membre">\n' +
-                '                                ✏️\n' +
-                '                                </a>\n' +
-                '                                <a class="delete" href="php/delete_member.php?id_member=<?php echo $member[\'id_member\']?>"\n' +
-                '                                   title="Supprimer ce membre">\n' +
-                '                                ❌\n' +
-                '                                </a>\n' +
-                '                            </span></div>'
+            return '<div class="member-item">' +
+                '<span class="name-member" data-id="' + member.id_member + '" data-name="' + member.name_member + '">' + member.name_member + '</span>' +
+                '<span class="modify">\n' +
+                '<a class="update" href="config.php?task=update' + member.id_member + '" title="Modifier ce membre">✏️</a>' +
+                '<a class="delete" href="config.php?task=delete&id_member=' + member.id_member + '" title="Supprimer ce membre">❌</a>' +
+                '</span>' +
+                '</div>'
         }).join('');
-        const members = document.querySelector('.member-list');
-        members.innerHTML = html;
+        const memberList = document.querySelector('.member-list');
+        // Insersion des données récupérées dans la section member-list
+        memberList.innerHTML = html;
+
+        let members = document.querySelectorAll('.member-item');
+
+        for (let i = 0; i < members.length; i++) {
+            let member = members[i];
+// ************************ Suppression de membre ************************
+            const deleteButton = member.querySelector('.delete');
+            deleteButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (confirm("Es-tu sûr(e) de vouloir supprimer ce membre ? 🤔")) {
+                    const deleteXHR = getHttpRequest();
+                    deleteXHR.open("GET", member.querySelector('.delete').getAttribute("href"));
+                    deleteXHR.onload = function () {
+                        getMembers();
+                    }
+                    deleteXHR.send();
+                }
+            });
+// ************************ Update de membre ************************
+            // ATTENTION
+            memberButtons = member.querySelector('.modify').cloneNode(true);
+            memberNameArea = member.querySelector('.name-member').cloneNode(false);
+            originalMemberName = member.querySelector('.name-member').innerHTML;
+
+            const updateButton = member.querySelector('.update');
+
+            updateButton.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const dataID = member.querySelector('.name-member').getAttribute('data-id');
+                const dataName = member.querySelector('.name-member').getAttribute('data-name');
+
+                // On remplace le contenu de member-item par un formulaire
+                member.innerHTML = '';
+                member.innerHTML = '<form method="post" action="config.php?task=update&id_member=' + dataID + '" class="update-form">' +
+                    '<input class="name-input" type="text" name="name_update" value="' + dataName + '" required>' +
+                    '<input class="update-input" type="submit" name="submit" value="✔️">' +
+                    '</form>';
+
+                const updateForm = member.querySelector('.update-form');
+                const button = member.querySelector('input[type="submit"]');
+
+                updateForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    // Récupération du champ name du formulaire
+                    const nameUpdate = member.querySelector("input[name=name_update]");
+
+                    const data = new FormData();
+                    data.append('name_update', nameUpdate.value);
+
+                    let updateXHR = getHttpRequest();
+                    updateXHR.open("POST", updateForm.getAttribute("action"));
+                    updateXHR.onload = function () {
+                        memberNameArea.innerHTML = nameUpdate;
+                        member.appendChild(memberNameArea);
+                        member.appendChild(memberButtons);
+                        getMembers();
+                    }
+                    updateXHR.send(data);
+                });
+            });
+
+        }
     }
     requeteAjax.send();
 }
@@ -57,7 +119,7 @@ function postMembers(event) {
 
     const data = new FormData();
     data.append('name', nameAdded.value);
-    const requeteAjax = getHttpRequest();
+    let requeteAjax = getHttpRequest();
     requeteAjax.open('POST', 'config.php?task=write');
     requeteAjax.onload = function () {
         nameAdded.value = '';
@@ -67,10 +129,9 @@ function postMembers(event) {
     requeteAjax.send(data);
 }
 
-getMembers();
-
 document.querySelector('.new-member-form').addEventListener('submit', postMembers);
 
+getMembers();
 /*
 
 for (let i = 0; i < members.length; i++) {
@@ -124,12 +185,5 @@ for (let i = 0; i < members.length; i++) {
     });
 
 
-    // ************* SECURITY DELETE MEMBER *************
-    let deleteButton = member.querySelector('.delete');
-    deleteButton.addEventListener('click', function (e) {
-        if (!confirm("Es-tu sûr(e) de vouloir supprimer ce membre ? 🤔")) {
-            e.preventDefault();
-        }
-    })
 }
 */
