@@ -26,6 +26,10 @@ h2 {
     margin-bottom: 30px;
 }
 
+textarea:focus, input:focus {
+    outline: none;
+}
+
 /* *********** HEADER *********** */
 header {
     display: flex;
@@ -136,7 +140,6 @@ input.update-input:hover {
 }
 
 .empty-equipage {
-    display: none;
     margin: auto;
     text-align: center;
     margin-top: 5rem;
@@ -167,9 +170,6 @@ footer p {
     body, .modify .update, .modify .delete, .member-item {
         font-size: 0.7rem;
     }
-    .member-item input, button {
-        padding: 0;
-    }
 }
 
 @media all and (min-width: 768px) and (max-width: 834px) {
@@ -193,6 +193,6 @@ footer p {
     }
 
     .new-member-form {
-        margin: auto;
+        margin: 0 auto;
     }
 }

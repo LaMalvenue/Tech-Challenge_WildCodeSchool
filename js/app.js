@@ -21,19 +21,17 @@ let getHttpRequest = function () {
     }
     return httpRequest
 }
-let memberButtons;
-let memberNameArea;
-let originalMemberName;
+const memberList = document.querySelector('.member-list');
 const emptyEquipage = document.querySelector('.empty-equipage');
 
 // ************************ Affichage des membres ************************
 function getMembers() {
-
-    let requeteAjax = getHttpRequest();
+    const requeteAjax = getHttpRequest();
     requeteAjax.open("GET", "config.php");
 
-    // Récupération de la BDD au format JSON puis conversion en HTML
+    // ***** Contenu de la fonction *****
     requeteAjax.onload = function () {
+        // Récupération de la BDD au format JSON puis conversion en HTML
         const result = JSON.parse(requeteAjax.responseText);
         const html = result.map(function (member) {
             return '<div class="member-item">' +
@@ -44,7 +42,6 @@ function getMembers() {
                 '</span>' +
                 '</div>'
         }).join('');
-        const memberList = document.querySelector('.member-list');
 
         if (html === "") {
             emptyEquipage.style.display = "block";
@@ -55,17 +52,20 @@ function getMembers() {
             emptyEquipage.style.display = "none";
             memberList.innerHTML = html;
 
-            let members = document.querySelectorAll('.member-item');
+            const members = document.querySelectorAll('.member-item');
 
             for (let i = 0; i < members.length; i++) {
-                let member = members[i];
+                const member = members[i];
+                const dataID = member.querySelector('.name-member').getAttribute('data-id');
+                const dataName = member.querySelector('.name-member').getAttribute('data-name');
+
 // ************************ Suppression de membre ************************
                 const deleteButton = member.querySelector('.delete');
                 deleteButton.addEventListener('click', function (e) {
                     e.preventDefault();
                     if (confirm("Es-tu sûr(e) de vouloir supprimer ce membre ? 🤔")) {
                         const deleteXHR = getHttpRequest();
-                        deleteXHR.open("GET", member.querySelector('.delete').getAttribute("href"));
+                        deleteXHR.open("GET", deleteButton.getAttribute("href"));
                         deleteXHR.onload = function () {
                             getMembers();
                         }
@@ -73,18 +73,9 @@ function getMembers() {
                     }
                 });
 // ************************ Update de membre ************************
-                memberButtons = member.querySelector('.modify').cloneNode(true);
-                memberNameArea = member.querySelector('.name-member').cloneNode(false);
-                originalMemberName = member.querySelector('.name-member').innerHTML;
-
                 const updateButton = member.querySelector('.update');
-
                 updateButton.addEventListener('click', function (e) {
                     e.preventDefault();
-
-                    const dataID = member.querySelector('.name-member').getAttribute('data-id');
-                    const dataName = member.querySelector('.name-member').getAttribute('data-name');
-
                     // On remplace le contenu de member-item par un formulaire
                     member.innerHTML = '';
                     member.innerHTML = '<form method="post" action="config.php?task=update&id_member=' + dataID + '" class="update-form">' +
@@ -93,49 +84,38 @@ function getMembers() {
                         '</form>';
 
                     const updateForm = member.querySelector('.update-form');
-                    const button = member.querySelector('input[type="submit"]');
+                    const nameUpdate = member.querySelector(".name-input");
+                    // Pour placer le curseur à la fin du nom du membre
+                    const nameLength = nameUpdate.value.length * 2;
+                    nameUpdate.focus();
+                    nameUpdate.setSelectionRange(nameLength, nameLength);
 
                     updateForm.addEventListener('submit', function (e) {
                         e.preventDefault();
-                        // Récupération du champ name du formulaire
-                        const nameUpdate = member.querySelector("input[name=name_update]");
-                        if (nameUpdate.value !== dataName) {
-                            const data = new FormData();
-                            data.append('name_update', nameUpdate.value);
-                            let updateXHR = getHttpRequest();
-                            updateXHR.open("POST", updateForm.getAttribute("action"));
-                            updateXHR.onload = function () {
-                                getMembers();
-                            }
-                            updateXHR.send(data);
-
-                        } else {
-                            member.innerHTML = '<div class="member-item">' +
-                                '<span class="name-member" data-id="' + dataID + '" data-name="' + dataName + '">' + dataName + '</span>' +
-                                '<span class="modify">\n' +
-                                '<a class="update" href="config.php?task=update' + dataID + '" title="Modifier ce membre">✏️</a>' +
-                                '<a class="delete" href="config.php?task=delete&id_member=' + dataID + '" title="Supprimer ce membre">❌</a>' +
-                                '</span>' +
-                                '</div>'
+                        const data = new FormData();
+                        data.append('name_update', nameUpdate.value);
+                        const updateXHR = getHttpRequest();
+                        updateXHR.open("POST", updateForm.getAttribute("action"));
+                        updateXHR.onload = function () {
+                            getMembers();
                         }
+                        updateXHR.send(data);
                     });
                 });
             }
         }
     }
     requeteAjax.send();
-
 }
 
 // Ajouter des membres
 function postMembers(event) {
+    const nameAdded = document.querySelector("#name");
     event.preventDefault();
     // Récupération du champ name du formulaire
-    const nameAdded = document.querySelector("#name");
-
     const data = new FormData();
     data.append('name', nameAdded.value);
-    let requeteAjax = getHttpRequest();
+    const requeteAjax = getHttpRequest();
     requeteAjax.open('POST', 'config.php?task=write');
     requeteAjax.onload = function () {
         nameAdded.value = '';
@@ -148,4 +128,3 @@ function postMembers(event) {
 document.querySelector('.new-member-form').addEventListener('submit', postMembers);
 
 getMembers();
-
