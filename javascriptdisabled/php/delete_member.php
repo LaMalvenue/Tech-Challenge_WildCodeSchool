@@ -1,5 +1,5 @@
 <?php
-include('../config.php');
+include('../configNoJS.php');
 
 $delete_member = $WildCodeSchool->prepare('	DELETE FROM equipage
 								WHERE id_member=:id_member');

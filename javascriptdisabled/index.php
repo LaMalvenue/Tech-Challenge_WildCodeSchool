@@ -1,5 +1,5 @@
 <?php
-include('javascriptdisabled/config.php');
+include('configNoJS.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -40,7 +40,7 @@ include('javascriptdisabled/config.php');
             <h2>Ajouter un(e) Argonaute</h2>
             <form action="php/add_member.php" method="post" class="new-member-form">
                 <label for="name">Nom de l&apos;Argonaute</label>
-                <input id="name" name="name" type="text" placeholder="Charalampos" required/>
+                <input id="name" name="name" type="text" placeholder="Charalampos" autofocus required/>
                 <button type="submit">Envoyer</button>
             </form>
         </div>
@@ -72,12 +72,8 @@ include('javascriptdisabled/config.php');
                                 <?php echo htmlspecialchars($member['name_member']) ?>
                             </span>
                             <span class="modify">
-                                <a class="update"
-                                   href="php/update_member.php?id_member=<?php echo $member['id_member']?>"
-                                   title="Modifier ce membre">
-                                ✏️
-                                </a>
-                                <a class="delete" href="php/delete_member.php?id_member=<?php echo $member['id_member']?>"
+                                <a class="delete"
+                                   href="php/delete_member.php?id_member=<?php echo $member['id_member'] ?>"
                                    title="Supprimer ce membre">
                                 ❌
                                 </a>

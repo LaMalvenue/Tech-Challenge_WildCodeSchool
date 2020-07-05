@@ -1,10 +1,10 @@
 <?php
-include('../config.php');
+include('../configNoJS.php');
 
 if( isset($_POST['name']) ) {
     $add_member = $WildCodeSchool->prepare('INSERT INTO equipage(name_member) VALUES(:name)');
     $add_member->execute(array(
-        'name'=> $_POST['name']
+        'name'=> htmlspecialchars($_POST['name'])
     ));
     $add_member->closeCursor();
 }

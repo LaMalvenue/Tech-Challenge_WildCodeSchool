@@ -27,7 +27,7 @@ const emptyEquipage = document.querySelector('.empty-equipage');
 // ************************ Affichage des membres ************************
 function getMembers() {
     const requeteAjax = getHttpRequest();
-    requeteAjax.open("GET", "config.php");
+    requeteAjax.open("GET", "configNoJS.php");
 
     // ***** Contenu de la fonction *****
     requeteAjax.onload = function () {
@@ -37,8 +37,8 @@ function getMembers() {
             return '<div class="member-item">' +
                 '<span class="name-member" data-id="' + member.id_member + '" data-name="' + member.name_member + '">' + member.name_member + '</span>' +
                 '<span class="modify">\n' +
-                '<a class="update" href="config.php?task=update' + member.id_member + '" title="Modifier ce membre">✏️</a>' +
-                '<a class="delete" href="config.php?task=delete&id_member=' + member.id_member + '" title="Supprimer ce membre">❌</a>' +
+                '<a class="update" href="configNoJS.php?task=update' + member.id_member + '" title="Modifier ce membre">✏️</a>' +
+                '<a class="delete" href="configNoJS.php?task=delete&id_member=' + member.id_member + '" title="Supprimer ce membre">❌</a>' +
                 '</span>' +
                 '</div>'
         }).join('');
@@ -78,7 +78,7 @@ function getMembers() {
                     e.preventDefault();
                     // On remplace le contenu de member-item par un formulaire
                     member.innerHTML = '';
-                    member.innerHTML = '<form method="post" action="config.php?task=update&id_member=' + dataID + '" class="update-form">' +
+                    member.innerHTML = '<form method="post" action="configNoJS.php?task=update&id_member=' + dataID + '" class="update-form">' +
                         '<input class="name-input" type="text" name="name_update" value="' + dataName + '" required>' +
                         '<input class="update-input" type="submit" name="submit" value="✔️">' +
                         '</form>';
@@ -116,7 +116,7 @@ function postMembers(event) {
     const data = new FormData();
     data.append('name', nameAdded.value);
     const requeteAjax = getHttpRequest();
-    requeteAjax.open('POST', 'config.php?task=write');
+    requeteAjax.open('POST', 'configNoJS.php?task=write');
     requeteAjax.onload = function () {
         nameAdded.value = '';
         nameAdded.focus();

@@ -17,7 +17,7 @@ if ($task == "write") {
 } else if ($task == "update") {
     updateMember();
 } else if ($task == "delete") {
-    deleteteMember();
+    deleteMember();
 }else {
     getMembers();
 }
@@ -45,7 +45,7 @@ function postMembers()
     echo json_encode(["status" => "success"]);
 }
 
-function deleteteMember() {
+function deleteMember() {
     global $WildCodeSchool;
     $delete_member = $WildCodeSchool->prepare('DELETE FROM equipage WHERE id_member=:id_member');
     $delete_member->execute(array(
