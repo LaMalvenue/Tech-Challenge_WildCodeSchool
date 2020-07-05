@@ -49,11 +49,11 @@
             <h2>Membres de l'équipage</h2>
             <section class="member-list">
                 <p>Chargement des membres de l'équipage...</p>
-                <div class="empty-equipage">
-                    <p>Ton équipage est vide ! 😯</p>
-                    <p>Ajoute tes compagnons pour pouvoir partir à l'aventure !</p>
-                </div>
             </section>
+            <div class="empty-equipage">
+                <p>Ton équipage est vide ! 😯</p>
+                <p>Ajoute tes compagnons pour pouvoir partir à l'aventure !</p>
+            </div>
         </div>
     </div>
 </main>
