@@ -26,6 +26,10 @@ h2 {
     margin-bottom: 30px;
 }
 
+textarea:focus, input:focus {
+    outline: none;
+}
+
 /* *********** HEADER *********** */
 header {
     display: flex;
@@ -43,7 +47,7 @@ header h1 {
     font-size: 2.5em;
 }
 
-/* *********** FORM *********** */
+/* *********** FORM ADD MEMBER *********** */
 .add-member {
     background-color: #f76c6c;
     color: white;
@@ -100,6 +104,8 @@ button:hover {
     flex: 0 0 33.3333%;
 }
 
+/* *********** FORM UPDATE MEMBER *********** */
+
 .modify, .update-form {
     display: inline-flex;
     vertical-align: middle;
@@ -121,10 +127,12 @@ button:hover {
 input.name-input {
     border: 2px solid #f76c6c;
     text-align: center;
+    width: calc(100% - 30px);
 }
 
 input.update-input {
     font-size: 0.8rem;
+    width: 30px;
 }
 
 input.update-input:hover {
@@ -158,24 +166,9 @@ footer p {
 }
 
 /* *********** MEDIA QUERIES *********** */
-@media all and (max-width: 337px) {
-    input {
-        margin-bottom: 5px;
-    }
-    body {
+@media all and (max-width: 433px) {
+    body, .modify .update, .modify .delete, .member-item {
         font-size: 0.7rem;
-    }
-}
-
-@media all and (min-width: 338px) and (max-width: 433px) {
-    body {
-        font-size: 0.85rem;
-    }
-    .member-item {
-        font-size: 0.7rem;
-    }
-    input {
-        margin-bottom: 5px;
     }
 }
 
@@ -200,6 +193,6 @@ footer p {
     }
 
     .new-member-form {
-        margin: auto;
+        margin: 0 auto;
     }
 }

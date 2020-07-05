@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include('javascriptdisabled/config.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,14 +19,13 @@ include('config.php');
     <link rel="shortcut icon" type="image/png" href="https://avatars2.githubusercontent.com/u/8874047?s=280&v=4"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <!-- Header section -->
 <header>
     <h1>
-        <img width="400px"
-             src="https://www.wildcodeschool.com/assets/logo_main-e4f3f744c8e717f1b7df3858dce55a86c63d4766d5d9a7f454250145f097c2fe.png"
+        <img src="https://www.wildcodeschool.com/assets/logo_main-e4f3f744c8e717f1b7df3858dce55a86c63d4766d5d9a7f454250145f097c2fe.png"
              alt="Wild Code School logo"/>
         Les Argonautes
     </h1>
@@ -108,6 +107,5 @@ include('config.php');
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
-<script src="js/app.js"></script>
 </body>
 </html>
