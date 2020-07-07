@@ -50,37 +50,40 @@ include('configNoJS.php');
             <h2>Membres de l'équipage</h2>
             <section class="member-list">
 
-                <?php
 
-                $req_members = $WildCodeSchool->query(' SELECT * FROM equipage ORDER BY id_member ASC');
-                $members_count = $WildCodeSchool->query('SELECT COUNT(*) AS members_count FROM equipage');
-                $count = $members_count->fetch();
+            <?php
 
-                if ($count['members_count'] < 1) { ?>
+            $req_members = $WildCodeSchool->query(' SELECT * FROM equipage ORDER BY id_member ASC');
+            $members_count = $WildCodeSchool->query('SELECT COUNT(*) AS members_count FROM equipage');
+            $count = $members_count->fetch();
 
-                    <div class="empty-equipage">
-                        <p>Ton équipage est vide ! 😯</p>
-                        <p>Ajoute tes compagnons pour pouvoir partir à l'aventure !</p>
-                    </div>
-                <?php } else {
+            if ($count['members_count'] < 1) { ?>
 
-                    while ($member = $req_members->fetch()) { ?>
+                <div class="empty-equipage">
+                    <p>Ton équipage est vide ! 😯</p>
+                    <p>Ajoute tes compagnons pour pouvoir partir à l'aventure !</p>
+                </div>
 
-                        <div class="member-item">
+            <?php } else {
+
+            while ($member = $req_members->fetch()) { ?>
+
+
+                <div class="member-item">
 
                             <span class="name-member">
                                 <?php echo htmlspecialchars($member['name_member']) ?>
                             </span>
-                            <span class="modify">
+                    <span class="modify">
                                 <a class="delete"
                                    href="php/delete_member.php?id_member=<?php echo $member['id_member'] ?>"
                                    title="Supprimer ce membre">
                                 ❌
                                 </a>
                             </span>
-                        </div>
+                </div>
 
-                    <?php }
+                <?php }
                 }
                 $req_members->closeCursor();
                 $members_count->closeCursor();

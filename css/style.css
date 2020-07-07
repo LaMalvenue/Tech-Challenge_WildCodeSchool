@@ -3,6 +3,7 @@
 
 /* *********** GENERAL SETTINGS *********** */
 body {
+    min-width: 285px;
     margin: 0;
     font-family: 'Roboto', sans-serif;
 }
@@ -166,7 +167,12 @@ footer p {
 }
 
 /* *********** MEDIA QUERIES *********** */
-@media all and (max-width: 433px) {
+@media all and (max-width: 365px) {
+    body, .modify .update, .modify .delete, .member-item {
+        font-size: 0.5rem;
+    }
+}
+@media all  and (min-width: 366px) and (max-width: 433px) {
     body, .modify .update, .modify .delete, .member-item {
         font-size: 0.7rem;
     }
